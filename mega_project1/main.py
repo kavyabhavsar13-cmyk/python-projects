@@ -13,6 +13,7 @@ def wake_word():
  with sr.Microphone() as source:
         print("Listening...")
         audio = recognizer.listen(source)
+        speak("Processing your command...")
         try:
             return recognizer.recognize_google(audio).lower()
         except:
