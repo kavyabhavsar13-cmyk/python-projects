@@ -1,0 +1,1 @@
+ command = recognizer.recognize_google(audio).lower()
