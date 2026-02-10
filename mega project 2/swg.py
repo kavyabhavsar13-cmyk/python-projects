@@ -1,3 +1,5 @@
+dict={}
+
 def swg():
     list=["snake","water","gun"]
     import random
@@ -18,12 +20,17 @@ def swg():
     if(computer==choice):
             
             print(f"both you and computer chose {choice}. It's a tie!")
+            dict[name]=f"both chose {choice},it was a tie"
     elif(choice=="snake" and computer=="gun") or (choice=="water" and computer=="snake") or (choice=="gun" and computer=="water"):
-            
+            dict[name]=f"you chose {choice} and computer chose {computer},you lost the game"
             print(f"You lose! You chose {choice} and the computer chose {computer}.better luck next time")
     else:
-            
+            dict[name]=f"you chose {choice} and computer chose {computer},you won the game"
             print(f"You win! You chose {choice} and the computer chose {computer}. Congratulations!")
+    print("---------------------------leaderboard:-------------------------")
+    for name,attempt in dict.items():
+                print(f"| {name}: {attempt} |")
+    print("----------------------------------------------------------------")
     again=input("do you want to play again? Say yes or no: ")
     if again=="yes":
             swg()
