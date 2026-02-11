@@ -18,7 +18,6 @@ def swg():
             choice=input("kindly choose between snake, water and gun to play the game: ")
     print(f"you chose: {choice}")
     if(computer==choice):
-            
             print(f"both you and computer chose {choice}. It's a tie!")
             dict[name]=f"both chose {choice},it was a tie"
     elif(choice=="snake" and computer=="gun") or (choice=="water" and computer=="snake") or (choice=="gun" and computer=="water"):
