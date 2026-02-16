@@ -63,5 +63,84 @@
         else:            print(f"{name}: {attempts}")'''
 def hangman():
     print("**************************************************************************************************************")
-    print("                                               Welcome to Hangman!")
+    print("*                                                                                                            *")
+    print("*                                              Welcome to Hangman!                                           *")
+    print("*                                                                                                            *")
     print("**************************************************************************************************************")
+    print("=============================================================================================================")
+    print("< INSTRUCTIONS:                                                                                              >")
+    print("< 1. The computer will think of a word, and you have to guess it through letter or a whole word at once.     >")
+    print("< 2. You have 5 lives. Each wrong guess will cost you a life.                                                >")
+    print("< 3. If you guess the word correctly, you win! If you run out of lives, you lose.                            >")
+    print("=============================================================================================================")
+    name = input("Please enter your name to start the game: ")
+    print(f"Welcome, {name}!")
+    words = ["mango", "banana", "grape", "orange", "watermelon", "strawberry", "blueberry", "pineapple", "peach", "kiwi"]
+    import random
+    word = random.choice(words)
+    lives=6
+    attempts=0
+    final=["_ "] * len(word)
+    while(lives>0 and "".join(final)!=word):
+        print("=========================================================================================================")
+        print("".join(final))
+        print(f"You have {lives} remaining")
+        choice=input("enter your guess:")
+        attempts+=1
+        index=-1
+        for l in word:
+            index+=1
+            for c in choice:
+                if c in word:
+                    if l==c:
+                        final[index]=c
+                        print(f"You guessed the letter {c} correctly!＾▽＾")
+                else:
+                    print(f"The letter{c} is not there in the word")
+                    lives-=1       
+
+    guessed="".join(final)
+    if (guessed == word and lives>0):
+                print(f"You guessed the word correctly in {attempts} attempts ＾▽＾ ")
+                with open("hangman_leader.txt","a") as f:
+                    f.write(f"{name}:{attempts}\n")
+                
+    elif(guessed!=word or lives==0):
+                print(f"Oop! you ran out of lives.Better luck next time")
+                with open("hangman_leader.txt","a") as f:
+                    f.write(f"{name}:lost the game\n")
+    print(f"The word was {word} !")
+    highscore = 7
+    with open("hangman_leader.txt","r") as f:
+        for line in f:
+            parts = line.strip().split(":")
+
+            if len(parts)==2:
+                name,score = parts
+
+                if score != "lost the game":
+                    score = int(score)
+                    if score < highscore:
+                        highscore = score
+    print("------------------------------LEADERBOARD------------------------------")
+    with open("hangman_leader.txt","r") as f:
+        for line in f:
+            parts = line.strip().split(":")
+
+            if len(parts)==2:
+                name,score = parts
+
+                if score != "lost the game":
+                    score = int(score)
+                    if score == highscore:
+                        print(f"{name}: {score} attempts (high score)")
+                    else:
+                        print(f"{name}: {score} attempts")
+                else:
+                    print(f"{name}: {score}")
+hangman()
+
+
+
+
+
