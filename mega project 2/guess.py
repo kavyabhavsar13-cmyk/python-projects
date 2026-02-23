@@ -2,7 +2,7 @@ import random
 import os
 os.system("")
 
-def guess():
+def game():
     computer = random.choice(range(1,51))
 
     # TITLE
@@ -89,4 +89,4 @@ def guess():
                 else:
                     print(f"{name2}:lost the game")
 
-guess()
+

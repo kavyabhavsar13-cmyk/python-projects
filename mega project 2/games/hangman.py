@@ -152,7 +152,7 @@ def hangman():
                         print(f"{name}: {score} attempts")
                 else:
                     print(f"{name}: {score}")
-hangman()
+
 
 
 
