@@ -1,97 +1,92 @@
 import random
-def guess():
-    computer=random.choice(range(1,51))
+import os
+os.system("")
 
-    print("===============================================================================================")
-    print("|                                                                                             |")
-    print("|                                  Welcome to the Guessing Game!                              |")
-    print("|                                                                                             |")
-    print("===============================================================================================")
-    print("***********************************************************************************************")
-    print("*INSTRUCTIONS:                                                                                *")
-    print("""* 1.System generates a random number between 1 to 50.         
-* 2. Player guesses the number and has 6 lives.                                               *
-*                                                                                             *
-* 3. System gives hints: Too High / Too Low and lives remaining.                              *
-*                                                                                             *
-* 4.Attempts are counted for each guess and if guess is wrong, lives decreases by 1.          *
-*                                                                                             *
-* 5.Game ends when the correct number is guessed.                                             *
-*                                                                                             *
-* 6.The leader board is updated with the player's name and attempts taken to guess the number.*""")
-    print("***********************************************************************************************")
-    lives=6
-    attempts=0
-    print( )
-    name=input("=====Enter your name to start the game:")
-    while(lives>0):
-        print( )
-        chose=int(input("choose a number between 1 to 50:"))
-        print(f"you have {lives} remaining! ")
-        attempts+=1
-        if(computer==chose and 1 <= chose <= 50):
-            print(f"Congratulations! You guessed the number {computer} in {attempts} attempts!＾▽＾")
+def guess():
+    computer = random.choice(range(1,51))
+
+    # TITLE
+    print("\033[1;96;40m===============================================================================================\033[0m")
+    print("\033[1;96;40m|                                                                                             |\033[0m")
+    print("\033[1;96;40m|                                  WELCOME TO THE GUESSING GAME!                              |\033[0m")
+    print("\033[1;96;40m|                                                                                             |\033[0m")
+    print("\033[1;96;40m===============================================================================================\033[0m")
+
+    # INSTRUCTIONS
+    print("\033[1;35m***********************************************************************************************\033[0m")
+    print("\033[1;35m*INSTRUCTIONS:                                                                                *\033[0m")
+    print("\033[1;35m* 1.System generates a random number between 1 to 50.                                         *\033[0m")
+    print("\033[1;35m* 2. Player guesses the number and has 6 lives.                                               *\033[0m")
+    print("\033[1;35m* 3. System gives hints: Too High / Too Low and lives remaining.                              *\033[0m")
+    print("\033[1;35m* 4.Attempts are counted for each guess and if guess is wrong, lives decreases by 1.          *\033[0m")
+    print("\033[1;35m* 5.Game ends when the correct number is guessed.                                             *\033[0m")
+    print("\033[1;35m* 6.The leaderboard is updated with the player's name and attempts taken.                     *\033[0m")
+    print("\033[1;35m***********************************************************************************************\033[0m")
+
+    lives = 6
+    attempts = 0
+
+    print()
+    name = input("=====Enter your name to start the game:")
+
+    while(lives > 0):
+        print()
+        chose = int(input("Choose a number between 1 to 50:"))
+        print(f"You have \033[1;93m{lives} lives\033[0m remaining!")
+        attempts += 1
+
+        if(computer == chose and 1 <= chose <= 50):
+            print(f"\033[1;92mCongratulations! You guessed the number {computer} in {attempts} attempts! ＾▽＾\033[0m")
             with open("guess_leaderboard.txt","a") as f:
                 f.write(f"{name}:{attempts}\n")
             break
-        elif computer!=chose and 1 <= chose <= 50:
-            print("oh no! wrong guess ︶︹︺ ")
-            lives-=1
-            if computer>chose and lives>0:
-                print("please enter a higher number")
-            elif computer<chose and lives>0:
-                print("please enter a lower number")
-            
+
+        elif computer != chose and 1 <= chose <= 50:
+            print("\033[1;91mOh no! Wrong guess ︶︹︺\033[0m")
+            lives -= 1
+            if computer > chose and lives > 0:
+                print("\033[1;96mPlease enter a higher number\033[0m")
+            elif computer < chose and lives > 0:
+                print("\033[1;96mPlease enter a lower number\033[0m")
+
         else:
-            print("please enter a number between 1 to 50")
-        
-    if(lives==0):
-        print("Oh! You ran out of lives.Better luck next time.•‿•")
-        attempts="lost the game"
+            print("\033[1;91mPlease enter a number between 1 to 50\033[0m")
+
+    if(lives == 0):
+        print("\033[1;91mOh! You ran out of lives. Better luck next time •‿•\033[0m")
+        attempts = "lost the game"
         with open("guess_leaderboard.txt","a") as f:
-                f.write(f"{name}:{attempts}\n")
+            f.write(f"{name}:{attempts}\n")
+
     highscore = 7
 
     with open("guess_leaderboard.txt","r") as f:
         for line in f:
             parts = line.strip().split(":")
-
             if len(parts)==2:
-                name,score = parts
-
+                name1,score = parts
                 if score != "lost the game":
                     score = int(score)
                     if score < highscore:
                         highscore = score
 
+    print(f"\033[1;96mHighscore is: {highscore}\033[0m")
+    print(f"\033[1;96mThe number generated by computer was {computer}\033[0m")
 
-    print("Highscore is:",highscore)
-    print("The number generated by computer was",computer)
-    
-    print("=================================================LEADERBOARD================================================")
+    print("\033[1;93m=================================================LEADERBOARD================================================\033[0m")
+
     with open("guess_leaderboard.txt","r") as f:
         for line in f:
             parts = line.strip().split(":")
-
             if len(parts)==2:
-                name,score = parts
-
+                name2,score = parts
                 if score != "lost the game":
                     score = int(score)
                     if score == highscore:
-                        print(f"{name}:{score} attempts - highscore")
+                        print(f"{name2}:{score} attempts - \033[1;96mhighscore\033[0m")
                     else:
-                        print(f"{name}:{score} attempts")
+                        print(f"{name2}:{score} attempts")
                 else:
-                    print(f"{name}:lost the game")
+                    print(f"{name2}:lost the game")
 
-                
 guess()
-
-    
-        
-
-
-
-
-    

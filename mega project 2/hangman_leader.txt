@@ -1,0 +1,9 @@
+kavya:2
+machchar:lost the game
+kavya:2
+abc:2
+123:4
+mkaks:3
+jsd:lost the game
+python -u "c:\Users\kavya\OneDrive\Desktop\New folder\python projects\mega project 2\games\tempCodeRunnerFile.py":lost the game
+kavya:3
